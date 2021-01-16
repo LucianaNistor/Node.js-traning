@@ -1,3 +1,4 @@
 node_modules
 .idea/
 package-lock.json
+mongodb-compass_1.25.0_amd64.deb

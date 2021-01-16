@@ -33,6 +33,17 @@ const getUserByID = (req, res, next) => {
     })
 }
 
+const updateUserById = (req, res, next) => {
+    const { userID } = req.params
+
+    User.findOneAndDelete({_id: userID}, req.body, (err, result) => {
+        err ? res.status(404).json({message: 'MondoDB' + err.message}) : false
+        req.resources.users = result
+
+        return next()
+    })
+}
+
 const deleteUserByID = (req, res, next) => {
     const { userID } = req.params
 

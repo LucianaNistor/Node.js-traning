@@ -15,12 +15,6 @@ const initMongoose = () => {
     process.on("SIGINT", cleanUp)
     process.on("SIGTERM", cleanUp)
     process.on("SIGHUP", cleanUp)
-    // const db = mongoose.connection;
-
-    // db.on('error', (err) => {
-    //     console.log(err)
-    // })
-    // db.once('open', () => console.log('db connected'));
 }
 
 const cleanUp = () => mongoose.connection.close(() => process.exit())

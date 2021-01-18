@@ -14,7 +14,7 @@ const { responseToItem } = require('../helpers')
 router.get('/users', getUsers, responseToItem('users'))
 router.get('/users/:userID', getUserByID, responseToItem('users'))
 router.delete('/users/:userID', deleteUserByID, responseToItem('users'))
-router.post('/users', isAuth, createUser, responseToItem('users'))
+router.post('/users', createUser, responseToItem('users'))
 router.put('/users', (req, res, next) => res.json({text: 'Hello from user page PUT'}))
 
 module.exports = router;

@@ -13,13 +13,28 @@ const addressSchema = new Schema({
     street: {
         type: String,
         require: true,
-        unique: true
+        unique: false
     },
     number: {
         type: String,
         require: true,
         unique: false
-    }
+    },
+    userId: {
+        type: ObjectId,
+        ref: 'user',
+        required: true
+    },
+    billing: [
+        {
+            postalCode: {
+                type: Number
+            },
+            company: {
+                type: String
+            }
+        }
+    ]
 }, { timestamps: { currentTime: () => new Date().getTime() } })
 
 module.exports = mongoose.model('addressSchema', addressSchema, 'address')

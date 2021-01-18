@@ -5,8 +5,14 @@ const User = require('../models/users')
 const createUser = (req, res, next) => {
     const user = new User(req.body)
 
+    if (req.body.address) {
+        user.address = req.body.address
+    }
+
     user.save((err, result) => {
-        err ? res.status(404).json({message: 'MondoDB' + err.message}) : false
+        if(err) {
+            return next(err)
+        }
         req.resources.users = result
 
         return next()
@@ -33,16 +39,18 @@ const getUserByID = (req, res, next) => {
     })
 }
 
-const updateUserById = (req, res, next) => {
-    const { userID } = req.params
+// Model for update 
 
-    User.findOneAndDelete({_id: userID}, req.body, (err, result) => {
-        err ? res.status(404).json({message: 'MondoDB' + err.message}) : false
-        req.resources.users = result
+// const updateUserById = (req, res, next) => {
+//     const { userID } = req.params
 
-        return next()
-    })
-}
+//     User.findOneAndDelete({_id: userID}, req.body, (err, result) => {
+//         err ? res.status(404).json({message: 'MondoDB' + err.message}) : false
+//         req.resources.users = result
+
+//         return next()
+//     })
+// }
 
 const deleteUserByID = (req, res, next) => {
     const { userID } = req.params
